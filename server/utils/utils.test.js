@@ -30,4 +30,13 @@ describe("isUserInList::", () => {
       expect(result).toBe(false);
     });
   });
+
+  describe("when the list is empty", () => {
+    const userName = "batatas";
+    const result = isUserInList(userName, []);
+
+    it("should return false", () => {
+      expect(result).toBe(false);
+    });
+  });
 });
