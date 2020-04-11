@@ -7,6 +7,7 @@ const createError = require("http-errors");
 
 const {
   isUserPresentInList,
+  generateProjectId,
   generateUserName,
   getFilesContent,
   getUserInfo,
@@ -95,7 +96,39 @@ app.get(
     });
   })
 );
+app.post(
+  "/projects",
+  asyncHandler(async (request, response) => {
+    const { projectName, userName } = request.body;
+    const users = getFilesContent(USERS_FILE);
+    const projects = getFilesContent(PROJECTS_FILE);
+    const { firstName, lastName } = getUserInfo(users, userName);
+    const projectId = generateProjectId(firstName, lastName, projects.length);
+    const updatedProjects = [
+      ...projects,
+      {
+        projectId: projectId,
+        projectOwner: userName,
+        projectName: projectName,
+        tasks: [],
+      },
+    ];
 
+    fs.writeFile(
+      PROJECTS_FILE,
+      JSON.stringify(updatedProjects, null, 2),
+      function writeJSON(err) {
+        if (err) {
+          return err;
+        } else {
+          response.send({ status: 200, msg: "Project added to database." });
+        }
+      }
+    );
+  })
+);
+
+// middleware
 app.use((error, request, response, next) => {
   response.status(error.status || 500);
 

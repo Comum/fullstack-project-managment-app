@@ -45,8 +45,14 @@ const getUserInfo = (list, userName) => {
 const getUserProjects = (list, userName) =>
   list.filter((project) => project.projectOwner === userName);
 
+const generateProjectId = (firstName, lastName, projectsLength) =>
+  `${firstName.charAt(0).toLowerCase()}${lastName.charAt(0).toLowerCase()}-${
+    projectsLength + 1
+  }`;
+
 module.exports = {
   isUserPresentInList,
+  generateProjectId,
   generateUserName,
   getFilesContent,
   getUserInfo,
