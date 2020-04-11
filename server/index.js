@@ -2,7 +2,6 @@ const fs = require("fs");
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const md5 = require("md5");
 
 const USERS_FILE = "./database/users.json";
 const { generateUserName, isUserInList } = require("./utils/utils");
@@ -47,11 +46,6 @@ app.post("/users", (request, response) => {
       }
     );
   }
-});
-
-// TODO: delete
-app.get("/", (request, response) => {
-  response.send({ prop1: md5("123456"), prop2: md5("world") });
 });
 
 app.listen(8001, () => {
