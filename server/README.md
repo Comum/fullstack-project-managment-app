@@ -25,7 +25,7 @@ This is the server side for the Project Managment App. It has a list of routes t
     - params: projectId
 - /tasks
   - [POST] - create task
-    - params: projectId
+    - params: projectId, taskName
   - [PATCH] - completes taks
     - params: taksId, projectId
   - [DELETE] - deletes task

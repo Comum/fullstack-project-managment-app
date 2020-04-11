@@ -1,5 +1,7 @@
 const fs = require("fs");
 
+const { USERS_FILE, PROJECTS_FILE } = require("../constants/constants");
+
 const generateUserName = (firstName, lastName) => {
   return `${lastName.toLowerCase()}${firstName.charAt(0).toLowerCase()}`;
 };
@@ -62,10 +64,36 @@ const generateProjectId = (firstName, lastName) => {
     .toLowerCase()}-${date.getTime()}`;
 };
 
+const generateTaskId = (tasks) => {
+  const tasksLength = tasks.length;
+
+  return tasksLength > 0 ? tasks[tasksLength - 1].id + 1 : 0;
+};
+
+const getArrayIndex = (list, value, property) => {
+  const listLength = list.length;
+
+  if (listLength === 0) {
+    return -1;
+  }
+
+  let i;
+
+  for (i = 0; i < listLength; i++) {
+    if (list[i][property] === value) {
+      break;
+    }
+  }
+
+  return i;
+};
+
 module.exports = {
   filterArrayOfObjectsByProperty,
   generateProjectId,
+  generateTaskId,
   generateUserName,
+  getArrayIndex,
   getFilesContent,
   getUserInfo,
   isUserPresentInList,

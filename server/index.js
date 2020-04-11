@@ -8,14 +8,14 @@ const createError = require("http-errors");
 const {
   filterArrayOfObjectsByProperty,
   generateProjectId,
+  generateTaskId,
   generateUserName,
+  getArrayIndex,
   getFilesContent,
   getUserInfo,
   isUserPresentInList,
 } = require("./utils/utils");
-
-const USERS_FILE = "./database/users.json";
-const PROJECTS_FILE = "./database/projects.json";
+const { USERS_FILE, PROJECTS_FILE } = require("./constants/constants");
 
 const app = express();
 
@@ -151,6 +151,37 @@ app.delete(
           return err;
         } else {
           response.send({ status: 200, msg: "Project removed from database." });
+        }
+      }
+    );
+  })
+);
+
+// tasks routes
+app.post(
+  "/tasks",
+  asyncHandler(async (request, response) => {
+    const { projectId, taskName } = request.body;
+    const projects = getFilesContent(PROJECTS_FILE);
+    const projectIndex = getArrayIndex(projects, projectId, "projectId");
+    const taskId = generateTaskId(projects[projectIndex].tasks);
+    const taskCreationDate = new Date();
+    const updatedProjects = [...projects];
+    updatedProjects[projectIndex].tasks.push({
+      taskId: taskId,
+      taskName: taskName,
+      createdTime: taskCreationDate,
+      completedTime: null,
+    });
+
+    fs.writeFile(
+      PROJECTS_FILE,
+      JSON.stringify(updatedProjects, null, 2),
+      function writeJSON(err) {
+        if (err) {
+          return err;
+        } else {
+          response.send({ status: 200, msg: "Task added to the database." });
         }
       }
     );

@@ -1,7 +1,9 @@
 const {
   filterArrayOfObjectsByProperty,
   generateUserName,
+  generateTaskId,
   getUserInfo,
+  getArrayIndex,
   isUserPresentInList,
 } = require("./utils.js");
 
@@ -153,6 +155,48 @@ describe("Utils", () => {
             { projectOwner: "user4", projectName: "proj4" },
           ]);
         });
+      });
+    });
+  });
+
+  describe("generateTaskId::", () => {
+    describe("when task array is empty", () => {
+      const result = generateTaskId([]);
+
+      it("should return id 0", () => {
+        expect(result).toBe(0);
+      });
+    });
+
+    describe("when task array is populated", () => {
+      const result = generateTaskId([
+        { id: 0 },
+        { id: 1 },
+        { id: 2 },
+        { id: 3 },
+      ]);
+
+      it("should return the last id incremented", () => {
+        expect(result).toBe(4);
+      });
+    });
+  });
+
+  describe("getArrayIndex::", () => {
+    describe("when an array has multiple entries", () => {
+      const list = [{ id: 0 }, { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }];
+      const result = getArrayIndex(list, 3, "id");
+
+      it("should return the index that matches the search param", () => {
+        expect(result).toBe(3);
+      });
+    });
+
+    describe("when the array is empty", () => {
+      const result = getArrayIndex([], 3, "id");
+
+      it("should return the index that matches the search param", () => {
+        expect(result).toBe(-1);
       });
     });
   });
