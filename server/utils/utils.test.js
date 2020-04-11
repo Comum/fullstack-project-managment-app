@@ -170,10 +170,10 @@ describe("Utils", () => {
 
     describe("when task array is populated", () => {
       const result = generateTaskId([
-        { id: 0 },
-        { id: 1 },
-        { id: 2 },
-        { id: 3 },
+        { taskId: 0 },
+        { taskId: 1 },
+        { taskId: 2 },
+        { taskId: 3 },
       ]);
 
       it("should return the last id incremented", () => {
