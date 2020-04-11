@@ -2,6 +2,7 @@ const {
   isUserPresentInList,
   generateUserName,
   getUserInfo,
+  getUserProjects,
 } = require("./utils.js");
 
 describe("Utils", () => {
@@ -95,6 +96,33 @@ describe("Utils", () => {
 
       it("should return the object of the user", () => {
         expect(result).toEqual({});
+      });
+    });
+  });
+
+  describe("getUserProjecst::", () => {
+    const list = [
+      { projectOwner: "user1", projectName: "proj1" },
+      { projectOwner: "user2", projectName: "proj2" },
+    ];
+
+    describe("when a user has projects", () => {
+      const userName = "user1";
+      const response = getUserProjects(list, userName);
+
+      it("should return the user projects", () => {
+        expect(response).toEqual([
+          { projectOwner: "user1", projectName: "proj1" },
+        ]);
+      });
+    });
+
+    describe("when a user does not have projects", () => {
+      const userName = "user3";
+      const response = getUserProjects(list, userName);
+
+      it("should return an empty array", () => {
+        expect(response).toEqual([]);
       });
     });
   });

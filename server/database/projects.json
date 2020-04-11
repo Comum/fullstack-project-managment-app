@@ -1,0 +1,20 @@
+[
+  {
+    "projectId": "mr-1",
+    "projectOwner": "ribeirom",
+    "projectName": "Tech challenge server side",
+    "tasks": []
+  },
+  {
+    "projectId": "mr-2",
+    "projectOwner": "ribeirom",
+    "projectName": "Tech challenge client side",
+    "tasks": []
+  },
+  {
+    "projectId": "ac-1",
+    "projectOwner": "castroa",
+    "projectName": "Tech challenge review",
+    "tasks": []
+  }
+]

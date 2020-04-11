@@ -5,13 +5,16 @@ const cors = require("cors");
 const asyncHandler = require("express-async-handler");
 const createError = require("http-errors");
 
-const USERS_FILE = "./database/users.json";
 const {
   isUserPresentInList,
   generateUserName,
   getFilesContent,
   getUserInfo,
+  getUserProjects,
 } = require("./utils/utils");
+
+const USERS_FILE = "./database/users.json";
+const PROJECTS_FILE = "./database/projects.json";
 
 const app = express();
 
@@ -75,6 +78,21 @@ app.get(
         lastName: lastName,
       });
     }
+  })
+);
+
+// projects routes
+app.get(
+  "/projects",
+  asyncHandler(async (request, response) => {
+    const { userName } = request.body;
+    const projects = getFilesContent(PROJECTS_FILE);
+    const userProjects = getUserProjects(projects, userName);
+
+    response.send({
+      status: 200,
+      userProjects: userProjects,
+    });
   })
 );
 

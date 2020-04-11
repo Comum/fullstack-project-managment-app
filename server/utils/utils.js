@@ -42,9 +42,13 @@ const getUserInfo = (list, userName) => {
   return user;
 };
 
+const getUserProjects = (list, userName) =>
+  list.filter((project) => project.projectOwner === userName);
+
 module.exports = {
   isUserPresentInList,
   generateUserName,
   getFilesContent,
   getUserInfo,
+  getUserProjects,
 };
