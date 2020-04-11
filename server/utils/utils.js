@@ -27,8 +27,24 @@ const isUserPresentInList = (users, userName, password = null) => {
   return userExists;
 };
 
+const getUserInfo = (list, userName) => {
+  const listLength = list.length;
+  let user = {};
+  let i;
+
+  for (i = 0; i < listLength; i++) {
+    if (list[i].userName === userName) {
+      user = list[i];
+      break;
+    }
+  }
+
+  return user;
+};
+
 module.exports = {
+  isUserPresentInList,
   generateUserName,
   getFilesContent,
-  isUserPresentInList,
+  getUserInfo,
 };

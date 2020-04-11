@@ -7,9 +7,10 @@ const createError = require("http-errors");
 
 const USERS_FILE = "./database/users.json";
 const {
+  isUserPresentInList,
   generateUserName,
   getFilesContent,
-  isUserPresentInList,
+  getUserInfo,
 } = require("./utils/utils");
 
 const app = express();
@@ -65,7 +66,14 @@ app.get(
     if (!correctUserLogin) {
       throw createError(401, "User login incorrect.");
     } else {
-      response.send({ status: 200, userName: userName });
+      const { firstName, lastName } = getUserInfo(users, userName);
+
+      response.send({
+        status: 200,
+        userName: userName,
+        firstName: firstName,
+        lastName: lastName,
+      });
     }
   })
 );
