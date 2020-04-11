@@ -6,12 +6,12 @@ const asyncHandler = require("express-async-handler");
 const createError = require("http-errors");
 
 const {
-  isUserPresentInList,
+  filterArrayOfObjectsByProperty,
   generateProjectId,
   generateUserName,
   getFilesContent,
   getUserInfo,
-  getUserProjects,
+  isUserPresentInList,
 } = require("./utils/utils");
 
 const USERS_FILE = "./database/users.json";
@@ -88,7 +88,11 @@ app.get(
   asyncHandler(async (request, response) => {
     const { userName } = request.body;
     const projects = getFilesContent(PROJECTS_FILE);
-    const userProjects = getUserProjects(projects, userName);
+    const userProjects = filterArrayOfObjectsByProperty(
+      projects,
+      userName,
+      "projectOwner"
+    );
 
     response.send({
       status: 200,
@@ -122,6 +126,31 @@ app.post(
           return err;
         } else {
           response.send({ status: 200, msg: "Project added to database." });
+        }
+      }
+    );
+  })
+);
+app.delete(
+  "/projects",
+  asyncHandler(async (request, response) => {
+    const { projectId } = request.body;
+    const projects = getFilesContent(PROJECTS_FILE);
+    const updatedProjects = filterArrayOfObjectsByProperty(
+      projects,
+      projectId,
+      "projectId",
+      true
+    );
+
+    fs.writeFile(
+      PROJECTS_FILE,
+      JSON.stringify(updatedProjects, null, 2),
+      function writeJSON(err) {
+        if (err) {
+          return err;
+        } else {
+          response.send({ status: 200, msg: "Project removed from database." });
         }
       }
     );

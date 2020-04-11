@@ -1,8 +1,8 @@
 const {
-  isUserPresentInList,
+  filterArrayOfObjectsByProperty,
   generateUserName,
   getUserInfo,
-  getUserProjects,
+  isUserPresentInList,
 } = require("./utils.js");
 
 describe("Utils", () => {
@@ -100,29 +100,59 @@ describe("Utils", () => {
     });
   });
 
-  describe("getUserProjecst::", () => {
+  describe("filterArrayOfObjectsByProperty::", () => {
     const list = [
       { projectOwner: "user1", projectName: "proj1" },
       { projectOwner: "user2", projectName: "proj2" },
+      { projectOwner: "user4", projectName: "proj4" },
     ];
 
-    describe("when a user has projects", () => {
-      const userName = "user1";
-      const response = getUserProjects(list, userName);
+    describe("when inverted is not provided", () => {
+      describe("and when a user has projects", () => {
+        const userName = "user1";
+        const response = filterArrayOfObjectsByProperty(
+          list,
+          userName,
+          "projectOwner"
+        );
 
-      it("should return the user projects", () => {
-        expect(response).toEqual([
-          { projectOwner: "user1", projectName: "proj1" },
-        ]);
+        it("should return the user projects", () => {
+          expect(response).toEqual([
+            { projectOwner: "user1", projectName: "proj1" },
+          ]);
+        });
+      });
+
+      describe("and when a user does not have projects", () => {
+        const userName = "user3";
+        const response = filterArrayOfObjectsByProperty(
+          list,
+          userName,
+          "projectOwner"
+        );
+
+        it("should return an empty array", () => {
+          expect(response).toEqual([]);
+        });
       });
     });
 
-    describe("when a user does not have projects", () => {
-      const userName = "user3";
-      const response = getUserProjects(list, userName);
+    describe("when inverted is provided", () => {
+      describe("and when there are multiple projects", () => {
+        const userName = "user1";
+        const response = filterArrayOfObjectsByProperty(
+          list,
+          userName,
+          "projectOwner",
+          true
+        );
 
-      it("should return an empty array", () => {
-        expect(response).toEqual([]);
+        it("should return projects without the wanted value", () => {
+          expect(response).toEqual([
+            { projectOwner: "user2", projectName: "proj2" },
+            { projectOwner: "user4", projectName: "proj4" },
+          ]);
+        });
       });
     });
   });

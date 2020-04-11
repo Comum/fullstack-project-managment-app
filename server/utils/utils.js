@@ -42,8 +42,17 @@ const getUserInfo = (list, userName) => {
   return user;
 };
 
-const getUserProjects = (list, userName) =>
-  list.filter((project) => project.projectOwner === userName);
+const filterArrayOfObjectsByProperty = (
+  list,
+  value,
+  property,
+  inverted = false
+) => {
+  if (inverted) {
+    return list.filter((project) => project[property] !== value);
+  }
+  return list.filter((project) => project[property] === value);
+};
 
 const generateProjectId = (firstName, lastName, projectsLength) =>
   `${firstName.charAt(0).toLowerCase()}${lastName.charAt(0).toLowerCase()}-${
@@ -51,10 +60,10 @@ const generateProjectId = (firstName, lastName, projectsLength) =>
   }`;
 
 module.exports = {
-  isUserPresentInList,
+  filterArrayOfObjectsByProperty,
   generateProjectId,
   generateUserName,
   getFilesContent,
   getUserInfo,
-  getUserProjects,
+  isUserPresentInList,
 };
