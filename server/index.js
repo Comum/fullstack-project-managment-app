@@ -107,7 +107,7 @@ app.post(
     const users = getFilesContent(USERS_FILE);
     const projects = getFilesContent(PROJECTS_FILE);
     const { firstName, lastName } = getUserInfo(users, userName);
-    const projectId = generateProjectId(firstName, lastName, projects.length);
+    const projectId = generateProjectId(firstName, lastName);
     const updatedProjects = [
       ...projects,
       {

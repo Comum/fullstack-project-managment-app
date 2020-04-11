@@ -54,10 +54,13 @@ const filterArrayOfObjectsByProperty = (
   return list.filter((project) => project[property] === value);
 };
 
-const generateProjectId = (firstName, lastName, projectsLength) =>
-  `${firstName.charAt(0).toLowerCase()}${lastName.charAt(0).toLowerCase()}-${
-    projectsLength + 1
-  }`;
+const generateProjectId = (firstName, lastName) => {
+  const date = new Date();
+
+  return `${firstName.charAt(0).toLowerCase()}${lastName
+    .charAt(0)
+    .toLowerCase()}-${date.getTime()}`;
+};
 
 module.exports = {
   filterArrayOfObjectsByProperty,
