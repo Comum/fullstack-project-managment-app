@@ -49,9 +49,9 @@ const filterArrayOfObjectsByProperty = (
   inverted = false
 ) => {
   if (inverted) {
-    return list.filter((project) => project[property] !== value);
+    return list.filter((element) => element[property] !== value);
   }
-  return list.filter((project) => project[property] === value);
+  return list.filter((element) => element[property] === value);
 };
 
 const generateProjectId = (firstName, lastName) => {

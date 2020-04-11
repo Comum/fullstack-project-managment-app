@@ -187,6 +187,60 @@ app.post(
     );
   })
 );
+app.patch(
+  "/tasks",
+  asyncHandler(async (request, response) => {
+    const { projectId, taskId } = request.body;
+    const projects = getFilesContent(PROJECTS_FILE);
+    const projectIndex = getArrayIndex(projects, projectId, "projectId");
+    const tasksList = projects[projectIndex].tasks;
+    const taskIndex = getArrayIndex(tasksList, parseInt(taskId, 10), "taskId");
+    const taskCompletionDate = new Date();
+    const updatedProjects = [...projects];
+    updatedProjects[projectIndex].tasks[
+      taskIndex
+    ].completedTime = taskCompletionDate;
+
+    fs.writeFile(
+      PROJECTS_FILE,
+      JSON.stringify(updatedProjects, null, 2),
+      function writeJSON(err) {
+        if (err) {
+          return err;
+        } else {
+          response.send({ status: 200, msg: "Task updated." });
+        }
+      }
+    );
+  })
+);
+app.delete(
+  "/tasks",
+  asyncHandler(async (request, response) => {
+    const { projectId, taskId } = request.body;
+    const projects = getFilesContent(PROJECTS_FILE);
+    const projectIndex = getArrayIndex(projects, projectId, "projectId");
+    const updatedProjects = [...projects];
+    updatedProjects[projectIndex].tasks = filterArrayOfObjectsByProperty(
+      updatedProjects[projectIndex].tasks,
+      parseInt(taskId, 10),
+      "taskId",
+      true
+    );
+
+    fs.writeFile(
+      PROJECTS_FILE,
+      JSON.stringify(updatedProjects, null, 2),
+      function writeJSON(err) {
+        if (err) {
+          return err;
+        } else {
+          response.send({ status: 200, msg: "Task deleted." });
+        }
+      }
+    );
+  })
+);
 
 // middleware
 app.use((error, request, response, next) => {
