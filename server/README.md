@@ -15,12 +15,12 @@ This is the server side for the Project Managment App. It has a list of routes t
     - response: true if successful, error object if error occurs
   - [GET] - logs in user
     - params: userName, password
-    - response: { userName, userId } if successful, error object if error occurs
+    - response: { userName } if successful, error object if error occurs
 - /projects
   - [GET] - gets all user projects ( and tasks of project )
-    - params: userId
+    - params: userName
   - [POST] - adds project
-    - params: projectName, userId
+    - params: projectName, userName
   - [DELETE] - deletes project
     - params: projectId
 - /tasks
