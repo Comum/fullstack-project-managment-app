@@ -12,7 +12,10 @@ import {
   requestUserLogin,
   requestUserRegister,
 } from "./App/state/reducers/user-reducers";
-import { requestNewProject } from "./App/state/reducers/projects-reducers";
+import {
+  requestNewProject,
+  requestAllProjects,
+} from "./App/state/reducers/projects-reducers";
 
 import "./index.scss";
 
@@ -22,6 +25,7 @@ const rootReducer = combineReducers({
   requestUserLogin,
   requestUserRegister,
   requestNewProject,
+  requestAllProjects,
 });
 const store = createStore(
   rootReducer,

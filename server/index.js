@@ -88,7 +88,7 @@ app.post(
 app.get(
   "/projects",
   asyncHandler(async (request, response) => {
-    const { userName } = request.body;
+    const { userName } = request.query;
     const projects = getFilesContent(PROJECTS_FILE);
     const userProjects = filterArrayOfObjectsByProperty(
       projects,
