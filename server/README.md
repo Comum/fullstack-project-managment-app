@@ -13,7 +13,8 @@ This is the server side for the Project Managment App. It has a list of routes t
   - [POST] - registers a user
     - params: firstName, lastName, password
     - response: true if successful, error object if error occurs
-  - [GET] - logs in user
+- /login
+  - [POST] - logs in user
     - params: userName, password
     - response: { userName } if successful, error object if error occurs
 - /projects

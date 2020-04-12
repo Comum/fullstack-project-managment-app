@@ -1,5 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import md5 from "md5";
+
+import { requestUserLogin } from "../../state/actions/user-actions";
 
 import Container from "../../components/Container/Container";
 
@@ -8,6 +11,9 @@ import "./Login.scss";
 const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const error = useSelector((state) => state.requestUserLogin.error);
+  const dispatch = useDispatch();
 
   const onChangeValue = (value, func) => {
     func(value);
@@ -15,10 +21,12 @@ const Login = () => {
   const onFormSubmit = () => {
     const hashedPassword = md5(password);
 
-    console.log(username);
-    console.log(password);
-    console.log(hashedPassword);
+    dispatch(requestUserLogin(username, hashedPassword));
   };
+
+  useEffect(() => {
+    setErrorMsg(error);
+  }, [error]);
 
   return (
     <Container>
@@ -56,6 +64,7 @@ const Login = () => {
             <input type="submit" value="Login" />
           </li>
         </ul>
+        {errorMsg && <div className="login-form-error">{errorMsg}</div>}
       </form>
     </Container>
   );

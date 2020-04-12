@@ -32,10 +32,24 @@ function App() {
   const [content, setContent] = useState("entry");
   const [user, setUser] = useState("");
   const appContent = useSelector((state) => state.changeContent.content);
+  const userIsLoggedIn = useSelector(
+    (state) => state.requestUserLogin.isLoggedIn
+  );
+  const userFetched = useSelector((state) => state.requestUserLogin.user);
 
   useEffect(() => {
     setContent(appContent);
   }, [appContent]);
+
+  useEffect(() => {
+    setUser(userFetched);
+  }, [userFetched]);
+
+  useEffect(() => {
+    if (userIsLoggedIn) {
+      setContent(CONTENT);
+    }
+  }, [userIsLoggedIn]);
 
   return (
     <div className="app-main">

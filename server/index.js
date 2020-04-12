@@ -60,9 +60,12 @@ app.post(
     }
   })
 );
-app.get(
-  "/users",
+
+// login routes
+app.post(
+  "/login",
   asyncHandler(async (request, response) => {
+    console.log(request.body);
     const { userName, password } = request.body;
     const users = getFilesContent(USERS_FILE);
     const correctUserLogin = isUserPresentInList(users, userName, password);
@@ -252,6 +255,10 @@ app.use((error, request, response, next) => {
   });
 });
 
-app.listen(8001, () => {
-  console.log("App listening on port 8001!");
+let server = app.listen(8001, "0.0.0.0", () => {
+  console.log(
+    `API listening on http://${server.address().address}:${
+      server.address().port
+    }`
+  );
 });
