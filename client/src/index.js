@@ -12,6 +12,7 @@ import {
   requestUserLogin,
   requestUserRegister,
 } from "./App/state/reducers/user-reducers";
+import { requestNewProject } from "./App/state/reducers/projects-reducers";
 
 import "./index.scss";
 
@@ -20,6 +21,7 @@ const rootReducer = combineReducers({
   changeContent,
   requestUserLogin,
   requestUserRegister,
+  requestNewProject,
 });
 const store = createStore(
   rootReducer,
