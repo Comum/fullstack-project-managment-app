@@ -1,0 +1,40 @@
+@import "../../../variables/variables.scss";
+
+.new-project-container {
+  width: 100%;
+  height: 450px;
+
+  box-sizing: border-box;
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background-color: $backgroundColor;
+
+  border-radius: 5px;
+
+  overflow: hidden;
+}
+
+.new-project-item {
+  width: 100%;
+  max-width: 175px;
+  height: 20px;
+}
+
+.new-project-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 18px;
+}
+
+.new-project-input {
+  box-sizing: border-box;
+  padding: 0 5px;
+  margin: 15px 0;
+}
