@@ -1,6 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
+import Container from "../../components/Container/Container";
+
 import { changeContent } from "../../state/actions/state-actions";
 
 import { LOGIN, REGISTER } from "../../constants/constants";
@@ -15,26 +17,24 @@ const Entry = () => {
   };
 
   return (
-    <div className="entry-container">
-      <div className="entry-options">
-        <button
-          className="entry-option-button"
-          onClick={() => {
-            onClickButton(LOGIN);
-          }}
-        >
-          Login
-        </button>
-        <button
-          className="entry-option-button"
-          onClick={() => {
-            onClickButton(REGISTER);
-          }}
-        >
-          Register
-        </button>
-      </div>
-    </div>
+    <Container>
+      <button
+        className="entry-button"
+        onClick={() => {
+          onClickButton(LOGIN);
+        }}
+      >
+        Login
+      </button>
+      <button
+        className="entry-button"
+        onClick={() => {
+          onClickButton(REGISTER);
+        }}
+      >
+        Register
+      </button>
+    </Container>
   );
 };
 
