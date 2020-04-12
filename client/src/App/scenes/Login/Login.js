@@ -8,6 +8,7 @@ import Container from "../../components/Container/Container";
 
 import "./Login.scss";
 import "../../common-styles/form.scss";
+import "../../common-styles/buttons.scss";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -64,7 +65,7 @@ const Login = () => {
             />
           </li>
           <li className="form-item">
-            <input type="submit" value="Login" />
+            <input type="submit" value="Login" className="blue-button" />
           </li>
         </ul>
         {errorMsg && <div className="login-form-error">{errorMsg}</div>}

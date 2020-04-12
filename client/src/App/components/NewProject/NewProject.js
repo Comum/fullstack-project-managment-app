@@ -1,6 +1,7 @@
 import React from "react";
 
 import "./NewProject.scss";
+import "../../common-styles/buttons.scss";
 
 const NewProject = () => {
   return (
@@ -14,7 +15,10 @@ const NewProject = () => {
           type="text"
           placeholder="Project name"
         />
-        <input className="new-project-item new-project-button" type="submit" />
+        <input
+          className="new-project-item new-project-button blue-button"
+          type="submit"
+        />
       </div>
     </form>
   );

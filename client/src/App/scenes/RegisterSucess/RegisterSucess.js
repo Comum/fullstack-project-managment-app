@@ -8,6 +8,8 @@ import { LOGIN } from "../../constants/constants";
 
 import Container from "../../components/Container/Container";
 
+import "../../common-styles/buttons.scss";
+
 const RegisterSucess = ({ username }) => {
   const dispatch = useDispatch();
 
@@ -21,6 +23,7 @@ const RegisterSucess = ({ username }) => {
       <p>Registration successfull.</p>
       <p>Your username is: {username}</p>
       <button
+        className="blue-button"
         onClick={() => {
           onButtonClick();
         }}

@@ -8,6 +8,7 @@ import Container from "../../components/Container/Container";
 
 import "./Register.scss";
 import "../../common-styles/form.scss";
+import "../../common-styles/buttons.scss";
 
 const Register = () => {
   const [firstName, setFirstName] = useState("");
@@ -91,7 +92,7 @@ const Register = () => {
             />
           </li>
           <li className="form-item">
-            <input type="submit" value="Register" />
+            <input type="submit" value="Register" className="blue-button" />
           </li>
         </ul>
         {errorMsg && <div className="register-form-error">{errorMsg}</div>}

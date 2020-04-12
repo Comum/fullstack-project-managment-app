@@ -8,6 +8,7 @@ import { changeContent } from "../../state/actions/state-actions";
 import { LOGIN, REGISTER } from "../../constants/constants";
 
 import "./Entry.scss";
+import "../../common-styles/buttons.scss";
 
 const Entry = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const Entry = () => {
   return (
     <Container>
       <button
-        className="entry-button"
+        className="entry-button blue-button"
         onClick={() => {
           onClickButton(LOGIN);
         }}
@@ -27,7 +28,7 @@ const Entry = () => {
         Login
       </button>
       <button
-        className="entry-button"
+        className="entry-button blue-button"
         onClick={() => {
           onClickButton(REGISTER);
         }}
