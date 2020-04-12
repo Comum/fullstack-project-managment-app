@@ -5,6 +5,7 @@ import {
   REQUEST_USER_REGISTER_PENDING,
   REQUEST_USER_REGISTER_SUCCESS,
   REQUEST_USER_REGISTER_FAILED,
+  UPDATE_FINISHED_REGISTER,
 } from "../constants/user-constants";
 
 const initialStateUser = {
@@ -53,9 +54,11 @@ export const requestUserRegister = (
     case REQUEST_USER_REGISTER_PENDING:
       return { ...state, isPending: true };
     case REQUEST_USER_REGISTER_SUCCESS:
+      const { userName } = action.payload;
+
       return {
         ...state,
-        userName: action.payload,
+        userName: userName,
         isFinishRegister: true,
         isPending: false,
       };
@@ -64,6 +67,11 @@ export const requestUserRegister = (
         ...state,
         error: action.payload.response.data.message,
         isPending: false,
+      };
+    case UPDATE_FINISHED_REGISTER:
+      return {
+        ...state,
+        isFinishRegister: false,
       };
     default:
       return { ...state };

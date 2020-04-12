@@ -8,6 +8,7 @@ import {
   REQUEST_USER_REGISTER_PENDING,
   REQUEST_USER_REGISTER_SUCCESS,
   REQUEST_USER_REGISTER_FAILED,
+  UPDATE_FINISHED_REGISTER,
 } from "../constants/user-constants";
 
 export const requestUserLogin = (userName, password) => (dispatch) => {
@@ -55,3 +56,8 @@ export const requestUserRegister = (firstName, lastName, password) => (
       })
     );
 };
+
+export const updateFinishedRegister = () => ({
+  type: UPDATE_FINISHED_REGISTER,
+  payload: null,
+});

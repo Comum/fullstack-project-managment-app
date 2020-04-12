@@ -22,23 +22,6 @@ const RegisterSucess = lazy(() =>
   import("./scenes/RegisterSucess/RegisterSucess")
 );
 
-function renderSwitch(content) {
-  switch (content) {
-    case ENTRY:
-      return <Entry />;
-    case LOGIN:
-      return <Login />;
-    case REGISTER:
-      return <Register />;
-    case SUCCESSFUL_REGISTER:
-      return <RegisterSucess />;
-    case CONTENT:
-      return <Content />;
-    default:
-      return <LoadingElement />;
-  }
-}
-
 function App() {
   const [content, setContent] = useState("entry");
   const [user, setUser] = useState("");
@@ -46,10 +29,13 @@ function App() {
   const userIsLoggedIn = useSelector(
     (state) => state.requestUserLogin.isLoggedIn
   );
+  const userFetched = useSelector((state) => state.requestUserLogin.user);
   const userFinishRegister = useSelector(
     (state) => state.requestUserRegister.isFinishRegister
   );
-  const userFetched = useSelector((state) => state.requestUserLogin.user);
+  const registeredUsername = useSelector(
+    (state) => state.requestUserRegister.userName
+  );
 
   useEffect(() => {
     setContent(appContent);
@@ -70,6 +56,23 @@ function App() {
       setContent(SUCCESSFUL_REGISTER);
     }
   }, [userFinishRegister]);
+
+  const renderSwitch = (content) => {
+    switch (content) {
+      case ENTRY:
+        return <Entry />;
+      case LOGIN:
+        return <Login />;
+      case REGISTER:
+        return <Register />;
+      case SUCCESSFUL_REGISTER:
+        return <RegisterSucess username={registeredUsername} />;
+      case CONTENT:
+        return <Content />;
+      default:
+        return <LoadingElement />;
+    }
+  };
 
   return (
     <div className="app-main">
