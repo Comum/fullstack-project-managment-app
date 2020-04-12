@@ -1,7 +1,10 @@
-import React, { useState, Suspense, lazy } from "react";
+import React, { useState, Suspense, lazy, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import Header from "./components/Header/Header";
 import LoadingElement from "./components/LoadingElement/LoadingElement";
+
+import { CONTENT, ENTRY, LOGIN, REGISTER } from "./constants/constants";
 
 import "./App.scss";
 
@@ -12,13 +15,13 @@ const Register = lazy(() => import("./scenes/Register/Register"));
 
 function renderSwitch(content) {
   switch (content) {
-    case "entry":
+    case ENTRY:
       return <Entry />;
-    case "login":
+    case LOGIN:
       return <Login />;
-    case "register":
+    case REGISTER:
       return <Register />;
-    case "content":
+    case CONTENT:
       return <Content />;
     default:
       return <LoadingElement />;
@@ -28,6 +31,11 @@ function renderSwitch(content) {
 function App() {
   const [content, setContent] = useState("entry");
   const [user, setUser] = useState("");
+  const appContent = useSelector((state) => state.changeContent.content);
+
+  useEffect(() => {
+    setContent(appContent);
+  }, [appContent]);
 
   return (
     <div className="app-main">
