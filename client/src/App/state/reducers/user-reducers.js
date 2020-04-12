@@ -2,6 +2,9 @@ import {
   REQUEST_USER_LOGIN_PENDING,
   REQUEST_USER_LOGIN_SUCCESS,
   REQUEST_USER_LOGIN_FAILED,
+  REQUEST_USER_REGISTER_PENDING,
+  REQUEST_USER_REGISTER_SUCCESS,
+  REQUEST_USER_REGISTER_FAILED,
 } from "../constants/user-constants";
 
 const initialStateUser = {
@@ -9,6 +12,12 @@ const initialStateUser = {
   userName: "",
   isPending: false,
   isLoggedIn: false,
+};
+
+const initialStateRegister = {
+  userName: "",
+  isPending: false,
+  isFinishRegister: false,
 };
 
 export const requestUserLogin = (state = initialStateUser, action = {}) => {
@@ -26,6 +35,31 @@ export const requestUserLogin = (state = initialStateUser, action = {}) => {
         isLoggedIn: true,
       };
     case REQUEST_USER_LOGIN_FAILED:
+      return {
+        ...state,
+        error: action.payload.response.data.message,
+        isPending: false,
+      };
+    default:
+      return { ...state };
+  }
+};
+
+export const requestUserRegister = (
+  state = initialStateRegister,
+  action = {}
+) => {
+  switch (action.type) {
+    case REQUEST_USER_REGISTER_PENDING:
+      return { ...state, isPending: true };
+    case REQUEST_USER_REGISTER_SUCCESS:
+      return {
+        ...state,
+        userName: action.payload,
+        isFinishRegister: true,
+        isPending: false,
+      };
+    case REQUEST_USER_REGISTER_FAILED:
       return {
         ...state,
         error: action.payload.response.data.message,

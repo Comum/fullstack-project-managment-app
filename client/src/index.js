@@ -8,7 +8,10 @@ import thunkMiddleware from "redux-thunk";
 import App from "./App/App";
 
 import { changeContent } from "./App/state/reducers/state-reducers";
-import { requestUserLogin } from "./App/state/reducers/user-reducers";
+import {
+  requestUserLogin,
+  requestUserRegister,
+} from "./App/state/reducers/user-reducers";
 
 import "./index.scss";
 
@@ -16,6 +19,7 @@ const logger = createLogger();
 const rootReducer = combineReducers({
   changeContent,
   requestUserLogin,
+  requestUserRegister,
 });
 const store = createStore(
   rootReducer,

@@ -4,7 +4,13 @@ import { useSelector } from "react-redux";
 import Header from "./components/Header/Header";
 import LoadingElement from "./components/LoadingElement/LoadingElement";
 
-import { CONTENT, ENTRY, LOGIN, REGISTER } from "./constants/constants";
+import {
+  CONTENT,
+  ENTRY,
+  LOGIN,
+  REGISTER,
+  SUCCESSFUL_REGISTER,
+} from "./constants/constants";
 
 import "./App.scss";
 
@@ -12,6 +18,9 @@ const Content = lazy(() => import("./scenes/Content/Content"));
 const Entry = lazy(() => import("./scenes/Entry/Entry"));
 const Login = lazy(() => import("./scenes/Login/Login"));
 const Register = lazy(() => import("./scenes/Register/Register"));
+const RegisterSucess = lazy(() =>
+  import("./scenes/RegisterSucess/RegisterSucess")
+);
 
 function renderSwitch(content) {
   switch (content) {
@@ -21,6 +30,8 @@ function renderSwitch(content) {
       return <Login />;
     case REGISTER:
       return <Register />;
+    case SUCCESSFUL_REGISTER:
+      return <RegisterSucess />;
     case CONTENT:
       return <Content />;
     default:
@@ -34,6 +45,9 @@ function App() {
   const appContent = useSelector((state) => state.changeContent.content);
   const userIsLoggedIn = useSelector(
     (state) => state.requestUserLogin.isLoggedIn
+  );
+  const userFinishRegister = useSelector(
+    (state) => state.requestUserRegister.isFinishRegister
   );
   const userFetched = useSelector((state) => state.requestUserLogin.user);
 
@@ -50,6 +64,12 @@ function App() {
       setContent(CONTENT);
     }
   }, [userIsLoggedIn]);
+
+  useEffect(() => {
+    if (userFinishRegister) {
+      setContent(SUCCESSFUL_REGISTER);
+    }
+  }, [userFinishRegister]);
 
   return (
     <div className="app-main">

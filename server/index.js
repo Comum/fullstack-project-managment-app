@@ -53,7 +53,7 @@ app.post(
           if (err) {
             return err;
           } else {
-            response.send({ status: 200, msg: "User added to database." });
+            response.send({ status: 200, userName: userName });
           }
         }
       );
@@ -65,7 +65,6 @@ app.post(
 app.post(
   "/login",
   asyncHandler(async (request, response) => {
-    console.log(request.body);
     const { userName, password } = request.body;
     const users = getFilesContent(USERS_FILE);
     const correctUserLogin = isUserPresentInList(users, userName, password);

@@ -7,6 +7,7 @@ import { requestUserLogin } from "../../state/actions/user-actions";
 import Container from "../../components/Container/Container";
 
 import "./Login.scss";
+import "../../common-styles/form.scss";
 
 const Login = () => {
   const [username, setUsername] = useState("");
@@ -31,36 +32,38 @@ const Login = () => {
   return (
     <Container>
       <form
-        className="login-form"
+        className="form"
         onSubmit={(e) => {
           e.preventDefault();
           onFormSubmit();
         }}
       >
-        <ul className="login-form-list">
-          <li className="login-form-item">
-            <label className="login-form-item-label">Username</label>
+        <ul className="form-list">
+          <li className="form-item">
+            <div className="form-item-label">Username</div>
             <input
               type="text"
               placeholder="username"
-              className="login-form-item-input"
+              className="form-item-input"
+              required
               onChange={(e) => {
                 onChangeValue(e.target.value, setUsername);
               }}
             />
           </li>
-          <li className="login-form-item">
-            <label className="login-form-item-label">Password</label>
+          <li className="form-item">
+            <div className="form-item-label">Password</div>
             <input
               type="password"
-              className="login-form-item-input"
+              className="form-item-input"
               placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+              required
               onChange={(e) => {
                 onChangeValue(e.target.value, setPassword);
               }}
             />
           </li>
-          <li className="login-form-item">
+          <li className="form-item">
             <input type="submit" value="Login" />
           </li>
         </ul>
