@@ -40,8 +40,12 @@ const ProjectElement = ({ name, id, tasks }) => {
         </span>
       </div>
       <div className="project-element-content">
-        {incompleteTasks.length > 0 && <TaskContainer label="To Do" />}
-        {completeTasks.length > 0 && <TaskContainer label="Done" />}
+        {incompleteTasks.length > 0 && (
+          <TaskContainer label="To Do" tasks={incompleteTasks} />
+        )}
+        {completeTasks.length > 0 && (
+          <TaskContainer label="Done" tasks={completeTasks} />
+        )}
         <div className="project-element-new-task">
           <form
             className="project-element-new-task-form"

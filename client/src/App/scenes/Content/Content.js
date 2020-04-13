@@ -25,10 +25,10 @@ const Content = () => {
 
   useEffect(() => {
     if (requestProjectListOnProjectUpdate) {
-      dispatch(changeTaskUpdateFlag());
+      dispatch(changeProjectUpdateFlag());
     }
     if (requestProjectListOnTaskUpdate) {
-      dispatch(changeProjectUpdateFlag());
+      dispatch(changeTaskUpdateFlag());
     }
     dispatch(requestAllProjects(userName));
   }, [

@@ -1,0 +1,14 @@
+.task-element {
+  width: 100%;
+  height: 25px;
+
+  margin-bottom: 10px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.task-element-name {
+  margin-left: 10px;
+}
