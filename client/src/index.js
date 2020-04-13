@@ -15,6 +15,7 @@ import {
 import {
   requestNewProject,
   requestAllProjects,
+  deleteProject,
 } from "./App/state/reducers/projects-reducers";
 import {
   addNewTask,
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   addNewTask,
   completeTask,
   deleteTask,
+  deleteProject,
 });
 const store = createStore(
   rootReducer,

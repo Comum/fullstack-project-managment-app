@@ -9,6 +9,10 @@ import {
   REQUEST_ALL_PROJECT_PENDING,
   REQUEST_ALL_PROJECT_SUCCESS,
   REQUEST_ALL_PROJECT_FAILED,
+  DELETE_PROJECT_PENDING,
+  DELETE_PROJECT_SUCCESS,
+  DELETE_PROJECT_FAILED,
+  CHANGE_DELETE_PROJECT_FLAG,
 } from "../constants/projects-constants";
 
 export const requestNewProject = (projectName, userName) => (dispatch) => {
@@ -55,3 +59,30 @@ export const requestAllProjects = (userName) => (dispatch) => {
       })
     );
 };
+
+export const deleteProject = (projectId) => (dispatch) => {
+  dispatch({ type: DELETE_PROJECT_PENDING });
+  axios({
+    method: "delete",
+    url: `${API_URL}/projects`,
+    headers: {},
+    data: { projectId: projectId },
+  })
+    .then(({ data }) =>
+      dispatch({
+        type: DELETE_PROJECT_SUCCESS,
+        payload: data,
+      })
+    )
+    .catch((error) =>
+      dispatch({
+        type: DELETE_PROJECT_FAILED,
+        payload: error,
+      })
+    );
+};
+
+export const changeDeleteProjectFlag = () => ({
+  type: CHANGE_DELETE_PROJECT_FLAG,
+  payload: null,
+});

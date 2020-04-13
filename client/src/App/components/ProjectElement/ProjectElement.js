@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import TaskContainer from "../TaskContainer/TaskContainer";
 
 import { addNewTask } from "../../state/actions/task-actions";
+import { deleteProject } from "../../state/actions/projects-actions";
 
 import "./ProjectElement.scss";
 import "../../common-styles/buttons.scss";
@@ -35,7 +36,12 @@ const ProjectElement = ({ name, id, tasks }) => {
     <div className="project-element-container">
       <div className="project-element-header">
         <span className="project-element-header-text">{name}</span>
-        <span className="project-element-header-text project-element-header-text-cursor">
+        <span
+          className="project-element-header-text project-element-header-text-cursor"
+          onClick={() => {
+            dispatch(deleteProject(id));
+          }}
+        >
           &#10005;
         </span>
       </div>

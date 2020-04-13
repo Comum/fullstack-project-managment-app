@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   changeProjectUpdateFlag,
   requestAllProjects,
+  changeDeleteProjectFlag,
 } from "../../state/actions/projects-actions";
 import {
   changeTaskUpdateFlag,
@@ -20,6 +21,9 @@ const Content = () => {
   const userName = useSelector((state) => state.requestUserLogin.userName);
   const requestProjectListOnProjectUpdate = useSelector(
     (state) => state.requestNewProject.updateProjectList
+  );
+  const requestProjectListOnProjectDeletion = useSelector(
+    (state) => state.deleteProject.projectDeleted
   );
   const requestProjectListOnTaskUpdate = useSelector(
     (state) => state.addNewTask.taskUpdated
@@ -46,6 +50,9 @@ const Content = () => {
     if (requestProjectListOnTaskDeletion) {
       dispatch(changeDeleteTaskFlag());
     }
+    if (requestProjectListOnProjectDeletion) {
+      dispatch(changeDeleteProjectFlag());
+    }
     dispatch(requestAllProjects(userName));
   }, [
     dispatch,
@@ -53,6 +60,7 @@ const Content = () => {
     requestProjectListOnTaskUpdate,
     requestProjectListOnTaskCompletion,
     requestProjectListOnTaskDeletion,
+    requestProjectListOnProjectDeletion,
     userName,
   ]);
 
