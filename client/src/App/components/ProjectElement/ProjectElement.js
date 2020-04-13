@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 
 import TaskContainer from "../TaskContainer/TaskContainer";
 
@@ -30,6 +31,7 @@ const ProjectElement = ({ name, id, tasks }) => {
   };
   const onFormSubmit = () => {
     dispatch(addNewTask(id, taskName));
+    setTaskName("");
   };
 
   return (
@@ -65,6 +67,7 @@ const ProjectElement = ({ name, id, tasks }) => {
               className="project-element-new-task-input"
               placeholder="New task"
               required
+              value={taskName}
               onChange={(e) => {
                 onChangeValue(e.target.value, setTaskName);
               }}
@@ -75,6 +78,12 @@ const ProjectElement = ({ name, id, tasks }) => {
       </div>
     </div>
   );
+};
+
+ProjectElement.propTypes = {
+  name: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  tasks: PropTypes.array.isRequired,
 };
 
 export default ProjectElement;

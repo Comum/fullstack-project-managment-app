@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 
 import { completeTask, deleteTask } from "../../state/actions/task-actions";
 import { getFormatedDate } from "../../utils/utils";
@@ -39,6 +40,13 @@ const TaskElement = ({ id, name, completedTime, projectId }) => {
       )}
     </li>
   );
+};
+
+TaskElement.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  completedTime: PropTypes.string,
+  projectId: PropTypes.string.isRequired,
 };
 
 export default TaskElement;

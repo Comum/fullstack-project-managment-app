@@ -1,5 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 
 import { updateFinishedRegister } from "../../state/actions/user-actions";
 import { changeContent } from "../../state/actions/state-actions";
@@ -32,6 +33,10 @@ const RegisterSucess = ({ username }) => {
       </button>
     </Container>
   );
+};
+
+RegisterSucess.propTypes = {
+  username: PropTypes.string.isRequired,
 };
 
 export default RegisterSucess;

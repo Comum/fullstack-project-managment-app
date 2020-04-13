@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 import TaskElement from "../TaskElement/TaskElement";
 
@@ -25,6 +26,12 @@ const TaskContainer = ({ label, tasks, projectId }) => {
       <ul className="task-container">{taskList}</ul>
     </div>
   );
+};
+
+TaskContainer.propTypes = {
+  label: PropTypes.string.isRequired,
+  tasks: PropTypes.array.isRequired,
+  projectId: PropTypes.string.isRequired,
 };
 
 export default TaskContainer;
