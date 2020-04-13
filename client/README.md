@@ -8,10 +8,6 @@ This is the client side for the Project Managment App. It is built using the [cr
 - npm start
 - open browser in `http://localhost:3000/`
 
-# How to run tests
-
-- npm run test
-
 # How to build the project
 
 - npm run build
