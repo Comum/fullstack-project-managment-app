@@ -4,6 +4,7 @@ This is the server side for the Project Managment App. It has a list of routes t
 
 ## How to run
 
+- npm i - to install the dependencies
 - npm start - to run the server
 - npm run test - to run the tests
 
