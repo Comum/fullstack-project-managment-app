@@ -25,21 +25,18 @@ const Content = () => {
 
   useEffect(() => {
     if (requestProjectListOnProjectUpdate) {
-      dispatch(requestAllProjects(userName));
       dispatch(changeTaskUpdateFlag());
     }
-  }, [dispatch, requestProjectListOnProjectUpdate, userName]);
-
-  useEffect(() => {
     if (requestProjectListOnTaskUpdate) {
-      dispatch(requestAllProjects(userName));
       dispatch(changeProjectUpdateFlag());
     }
-  }, [dispatch, requestProjectListOnTaskUpdate, userName]);
-
-  useEffect(() => {
     dispatch(requestAllProjects(userName));
-  }, [dispatch, userName]);
+  }, [
+    dispatch,
+    requestProjectListOnProjectUpdate,
+    requestProjectListOnTaskUpdate,
+    userName,
+  ]);
 
   const getProjects = () => {
     let projectListItems = [];
