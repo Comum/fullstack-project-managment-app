@@ -16,6 +16,7 @@ import {
   requestNewProject,
   requestAllProjects,
 } from "./App/state/reducers/projects-reducers";
+import { addNewTask } from "./App/state/reducers/task-reducer";
 
 import "./index.scss";
 
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   requestUserRegister,
   requestNewProject,
   requestAllProjects,
+  addNewTask,
 });
 const store = createStore(
   rootReducer,

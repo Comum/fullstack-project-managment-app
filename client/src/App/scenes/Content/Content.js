@@ -2,9 +2,10 @@ import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import {
-  updateProjectList,
+  changeProjectUpdateFlag,
   requestAllProjects,
 } from "../../state/actions/projects-actions";
+import { changeTaskUpdateFlag } from "../../state/actions/task-actions";
 
 import NewProject from "../../components/NewProject/NewProject";
 import ProjectElement from "../../components/ProjectElement/ProjectElement";
@@ -13,18 +14,28 @@ import "./Content.scss";
 
 const Content = () => {
   const userName = useSelector((state) => state.requestUserLogin.userName);
-  const shouldRequestProjectList = useSelector(
+  const requestProjectListOnProjectUpdate = useSelector(
     (state) => state.requestNewProject.updateProjectList
+  );
+  const requestProjectListOnTaskUpdate = useSelector(
+    (state) => state.addNewTask.taskUpdated
   );
   const projectList = useSelector((state) => state.requestAllProjects.projects);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (shouldRequestProjectList) {
+    if (requestProjectListOnProjectUpdate) {
       dispatch(requestAllProjects(userName));
-      dispatch(updateProjectList());
+      dispatch(changeTaskUpdateFlag());
     }
-  }, [dispatch, shouldRequestProjectList, userName]);
+  }, [dispatch, requestProjectListOnProjectUpdate, userName]);
+
+  useEffect(() => {
+    if (requestProjectListOnTaskUpdate) {
+      dispatch(requestAllProjects(userName));
+      dispatch(changeProjectUpdateFlag());
+    }
+  }, [dispatch, requestProjectListOnTaskUpdate, userName]);
 
   useEffect(() => {
     dispatch(requestAllProjects(userName));

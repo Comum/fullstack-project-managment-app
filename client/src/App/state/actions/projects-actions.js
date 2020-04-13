@@ -33,7 +33,7 @@ export const requestNewProject = (projectName, userName) => (dispatch) => {
     );
 };
 
-export const updateProjectList = () => ({
+export const changeProjectUpdateFlag = () => ({
   type: CHANGE_UPDATE_PROJECT_LIST,
   payload: null,
 });
