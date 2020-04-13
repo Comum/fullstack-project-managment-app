@@ -5,7 +5,11 @@ import {
   changeProjectUpdateFlag,
   requestAllProjects,
 } from "../../state/actions/projects-actions";
-import { changeTaskUpdateFlag } from "../../state/actions/task-actions";
+import {
+  changeTaskUpdateFlag,
+  changeCompleteTaskFlag,
+  changeDeleteTaskFlag,
+} from "../../state/actions/task-actions";
 
 import NewProject from "../../components/NewProject/NewProject";
 import ProjectElement from "../../components/ProjectElement/ProjectElement";
@@ -20,6 +24,12 @@ const Content = () => {
   const requestProjectListOnTaskUpdate = useSelector(
     (state) => state.addNewTask.taskUpdated
   );
+  const requestProjectListOnTaskCompletion = useSelector(
+    (state) => state.completeTask.taskCompleted
+  );
+  const requestProjectListOnTaskDeletion = useSelector(
+    (state) => state.deleteTask.taskDeleted
+  );
   const projectList = useSelector((state) => state.requestAllProjects.projects);
   const dispatch = useDispatch();
 
@@ -30,11 +40,19 @@ const Content = () => {
     if (requestProjectListOnTaskUpdate) {
       dispatch(changeTaskUpdateFlag());
     }
+    if (requestProjectListOnTaskCompletion) {
+      dispatch(changeCompleteTaskFlag());
+    }
+    if (requestProjectListOnTaskDeletion) {
+      dispatch(changeDeleteTaskFlag());
+    }
     dispatch(requestAllProjects(userName));
   }, [
     dispatch,
     requestProjectListOnProjectUpdate,
     requestProjectListOnTaskUpdate,
+    requestProjectListOnTaskCompletion,
+    requestProjectListOnTaskDeletion,
     userName,
   ]);
 

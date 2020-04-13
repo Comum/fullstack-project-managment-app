@@ -11,4 +11,18 @@
 
 .task-element-name {
   margin-left: 10px;
+
+  flex-grow: 1;
+}
+
+.task-element-close-button {
+  display: none;
+
+  cursor: pointer;
+}
+
+.task-element:hover {
+  .task-element-close-button {
+    display: block;
+  }
 }

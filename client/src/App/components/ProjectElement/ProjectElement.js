@@ -41,10 +41,10 @@ const ProjectElement = ({ name, id, tasks }) => {
       </div>
       <div className="project-element-content">
         {incompleteTasks.length > 0 && (
-          <TaskContainer label="To Do" tasks={incompleteTasks} />
+          <TaskContainer label="To Do" tasks={incompleteTasks} projectId={id} />
         )}
         {completeTasks.length > 0 && (
-          <TaskContainer label="Done" tasks={completeTasks} />
+          <TaskContainer label="Done" tasks={completeTasks} projectId={id} />
         )}
         <div className="project-element-new-task">
           <form

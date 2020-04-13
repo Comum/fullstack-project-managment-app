@@ -1,13 +1,33 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+
+import { completeTask, deleteTask } from "../../state/actions/task-actions";
 
 import "./TaskElement.scss";
 
-const TaskElement = ({ id, name, completedTime }) => {
+const TaskElement = ({ id, name, completedTime, projectId }) => {
+  const dispatch = useDispatch();
+
   return (
     <li className="task-element">
-      {!completedTime && <input type="checkbox" />}
+      {!completedTime && (
+        <input
+          type="checkbox"
+          onClick={() => {
+            dispatch(completeTask(projectId, id));
+          }}
+        />
+      )}
       {!!completedTime && <span>&#10004;</span>}
       <div className="task-element-name">{name}</div>
+      <span
+        className="task-element-close-button"
+        onClick={() => {
+          dispatch(deleteTask(projectId, id));
+        }}
+      >
+        &#10005;
+      </span>
     </li>
   );
 };

@@ -4,7 +4,7 @@ import TaskElement from "../TaskElement/TaskElement";
 
 import "./TaskContainer.scss";
 
-const TaskContainer = ({ label, tasks }) => {
+const TaskContainer = ({ label, tasks, projectId }) => {
   const taskList = [];
 
   tasks.forEach(({ taskId, taskName, completedTime }) => {
@@ -14,6 +14,7 @@ const TaskContainer = ({ label, tasks }) => {
         id={taskId}
         name={taskName}
         completedTime={completedTime}
+        projectId={projectId}
       />
     );
   });
